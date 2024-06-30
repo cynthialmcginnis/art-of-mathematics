@@ -10,14 +10,73 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
             color: #333;
+            text-align: center;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Art of Mathematics</h1>
-    <p>This website explores the beauty and elegance of mathematical concepts.</p>
+    <div class="container">
+        <h1>Welcome to the Art of Mathematics</h1>
+        <p>This website explores the beauty and elegance of mathematical concepts.</p>
+        
+        <h2>Maurer Rose</h2>
+        <p>Here's a Python script that generates a Maurer Rose:</p>
+        <pre><code>
+import numpy as np
+import matplotlib.pyplot as plt
+from itertools import cycle
+
+def get_rose_xy(n, d):
+    k = d * np.linspace(0, 361, 361)
+    r = np.sin(np.radians(n * k))
+    x = r * np.cos(np.radians(k))
+    y = r * np.sin(np.radians(k))
+    return x, y
+
+def draw_rose(ax, n, d, colors):
+    x, y = get_rose_xy(n, d)
+    color_cycle = cycle(colors)
+    
+    for i in range(1, len(x)):
+        ax.plot([x[i-1], x[i]], [y[i-1], y[i]], c=next(color_cycle), lw=0.5)
+    
+    ax.axis('equal')
+    ax.axis('off')
+
+n = 6
+d = 71
+colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red']
+fig, ax = plt.subplots()
+draw_rose(ax, n, d, colors)
+plt.show()
+        </code></pre>
+        
+        <p>And here's the output of the script:</p>
+        <img src="maurer_rose.png" alt="Maurer Rose">
+    </div>
 </body>
 </html>
